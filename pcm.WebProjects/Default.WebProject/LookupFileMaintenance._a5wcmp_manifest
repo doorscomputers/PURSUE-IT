@@ -1,0 +1,13 @@
+A5SaveTimeStamp:20180122121646793
+css:GrBlue
+subComponent:lstFollowup.a5wcmp
+subComponent:lstInterviewType.a5wcmp
+subComponent:lstJobStatus.a5wcmp
+suba5wPage:index.a5w
+suba5wPage:logout.a5w
+copyfile:{C:\pcm\pcm.WebProjects\Default.WebProject\css\A5System\Images\wait.gif}
+copyfile:{C:\pcm\pcm.WebProjects\Default.WebProject\css\A5System\Images\tabclose.png}
+copyfile:{C:\pcm\pcm.WebProjects\Default.WebProject\css\A5System\Images\tabcloseHover.png}
+subComponent:lstFollowup
+subComponent:lstInterviewType
+subComponent:lstJobStatus

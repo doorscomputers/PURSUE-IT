@@ -1,0 +1,104 @@
+pm.from_email	= setup.from_email
+			pm.from_name	= setup.from_name
+			pm.send_to		= setup.contact_email
+			pm.send_to_bcc	= contact.emailaddress
+			pm.subject		= setup.contact_subject
+			pm.message_html	= msg
+			key 			= cn.resultset.data("sparkpost_key")
+			dim result as p = email_send_sparkpost(key,pm)
+			if result.error = .f.
+				status = "Sent"
+				else
+				status	 = "Failed"
+				if eval_valid("result.errorText")
+					errorText = alltrim(result.errorText)
+				end if
+			end if
+
+
+
+
+
+
+'''''''''''''''''
+Twilio
+var _msg = {dialog.object}.getValue('Message');
+var _toNumber = {dialog.object}.getValue('PhoneNumber');
+var objx = {dialog.object}._ajaxCallbackCompleteCode;
+var callbackId = A5.UUID();
+objx[callbackId] = {};
+objx[callbackId].success = function() { 
+alert('Message Successfully Sent');
+};
+objx[callbackId].fail = function(error) { 
+alert('Message Sending Failed');
+};
+var _cbData = A5.ajax.buildURLParam('_smsdata',JSON.stringify({"message": _msg,"toNumber": _toNumber,"xbasicFunction": "sendSMS_0a24a62ea3a54ff2aa6a1cc061619bd3"}));
+_cbData = _cbData + '&_callbackId2=' + callbackId;
+{dialog.object}.ajaxCallback('','','system:sendSMS','',_cbData, {errorFunction: function() { }, deviceOfflineFunction: function() { } })
+
+-----------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+dim mt as c
+mt = e.dataSubmitted.EmailText
+'if mt = "Email" then
+if 1 = 2 then
+	
+
+dim pm as p
+dim msg as c
+msg = <<%txt%
+	
+	<span style="font-family:Courier New, monospace">
+	Welcome to uswtn.net
+	
+	---------------------------------------------<br>
+	Sample Registration Confirmation<br>
+	Your account was successfuly created. You can now login at http://www.uswtn.net
+	{crlf(2)}<br>
+	</span>
+	%txt%
+	msg = evaluate_string(msg)
+
+	pm.from_email	= "warrend@doorscomputers.com"
+	pm.from_name	= "Warren"
+	pm.send_to		= e.dataSubmitted.UserName
+	pm.send_to_bcc	= "rr3800@gmail.com"
+	pm.subject		= "Welcome!"
+	pm.message_html	= msg
+	key 			= "b9e46296135e1c29ec999eec0e3c5f27609963a9"
+	dim result as p = email_send_sparkpost(key,pm)
+	if result.error = .f.
+	status = "Sent"
+		else
+			status	 = "Failed"
+			if eval_valid("result.errorText")
+				errorText = alltrim(result.errorText)
+				end if
+			end if
+else
+	dim js2 as c
+	js2 = <<%str%
+		//var _msg = {dialog.object}.getValue('Message');
+		var _msg = "This is a test Text confirmation message from a new user "
+		//var _toNumber = {dialog.object}.getValue('PhoneNumber');
+		var _toNumber = "+19492747034";
+		var objx = {dialog.object}._ajaxCallbackCompleteCode;
+		var callbackId = A5.UUID();
+		objx[callbackId] = {};
+		objx[callbackId].success = function() { 
+		alert('Message Successfully Sent');
+		};
+		objx[callbackId].fail = function(error) { 
+		alert('Message Sending Failed');
+		};
+		var _cbData = A5.ajax.buildURLParam('_smsdata',JSON.stringify({"message": _msg,"toNumber": _toNumber,"xbasicFunction": "sendSMS_0a24a62ea3a54ff2aa6a1cc061619bd3"}));
+		_cbData = _cbData + '&_callbackId2=' + callbackId;
+		{dialog.object}.ajaxCallback('','','system:sendSMS','',_cbData, {errorFunction: function() { }, deviceOfflineFunction: function() { } })
+		%str%
+		e.javascript = js2
+end if
